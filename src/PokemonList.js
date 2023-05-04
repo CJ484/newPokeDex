@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-export default function PokemonList({pokemon}) {
+export default function PokemonList({ data }) {
   return (
     <div>
-      {pokemon.map(p => (
-        <div key={p}>{p}</div>
+      {data.map((d) => (
+        <div key={d.id}>{d.name}</div>
       ))}
     </div>
-  )
+  );
 }
