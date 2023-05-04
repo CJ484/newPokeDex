@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Pagination({ getNextPage, getPrevPage }) {
   return (
-    <div>
-      {getPrevPage && <button onClick={getPrevPage}>Prev</button>}
-      {getNextPage && <button onClick={getNextPage}>Next</button>}
+    <div className="pageNation">
+      {getPrevPage && <button className="btn fa-solid fa-circle-chevron-left fa-2xl" onClick={getPrevPage}></button>}
+      {getNextPage && <button className="btn fa-solid fa-circle-chevron-right fa-2xl" onClick={getNextPage}></button>}
     </div>
   );
 }
