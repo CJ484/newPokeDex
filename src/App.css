@@ -1,0 +1,74 @@
+#root {
+  width: 100%;
+}
+
+body {
+  background: url(/src/Images/honeycombGreyBackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.body {
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+  flex-direction: column;
+  max-width: 80%;
+  justify-content: center;
+  text-align: center;
+}
+
+ .h3 {
+  color: rgb(127, 253, 255);
+ }
+
+ h6 {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 0 3px white;
+ }
+
+
+.display-1 {
+  color: rgb(253, 253, 131);
+  justify-content: center;
+}
+
+.cardGrid {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: row;
+  max-width: 75%;
+  flex-wrap: wrap;
+  
+}
+
+.card {
+  background-color: darkgrey;
+  margin: 8px;
+box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.card-img-top {
+  box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+}
+.pokeList {
+  color: whitesmoke;
+}
+
+.pageNation {
+    margin: 30px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn {
+    color: rgba(240, 255, 255, 1.0);
+    font-size: 3rem;
+    margin: 0 40px;
+}
+
+.btn:hover {
+    color: rgba(240, 255, 255, 0.682);
+}
