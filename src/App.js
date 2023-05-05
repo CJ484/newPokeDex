@@ -3,10 +3,9 @@ import PokemonList from "./PokemonList";
 import axios from "axios";
 import "./App.css";
 import REACT_POKE from "./systemReact";
-import Pagination from "./Pagination";
+import PaginationFunction from "./Pagination";
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
   const [pokemonURL, setpokemonURL] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
@@ -42,12 +41,22 @@ function App() {
   const fetchPokemonData = async (u) => {
     const promise = u.map(async (items) => {
       const response = await axios.get(items);
+      console.log(response);
+      let name = response.data.name;
+      let formalName = name[0].toUpperCase()+name.substring(1)
+
       return {
-        name: response.data.name,
+        name: formalName,
         id: response.data.id,
         weight: response.data.weight,
         height: response.data.height,
         sprite: response.data.sprites.front_default,
+        type: response.data.types.map((n) => {
+          let hold = n.type.name
+          return hold[0].toUpperCase()+hold.substring(1);
+          
+        }
+        )
       };
     });
     const results = await axios.all(promise);
@@ -63,14 +72,15 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Pokedex</h1>
+    <div className="body">
+      <h1 className="display-1">Pokedex</h1>
+      <h3 className="h3">Gotta Catch them all</h3>
       {loading ? (
         <div>Loading...</div>
       ) : (
         <div>
           <PokemonList data={data} />
-          <Pagination
+          <PaginationFunction
             getNextPage={nextpageCurrent ? getNextPage : null}
             getPrevPage={prevpageCurrent ? getPrevPage : null}
           />
