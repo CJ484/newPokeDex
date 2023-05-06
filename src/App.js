@@ -6,33 +6,30 @@ import REACT_POKE from "./systemReact";
 import PaginationFunction from "./Pagination";
 
 function App() {
+  const ITEMS_PER_PAGE = 20;
+  const [currentPage, setcurrentPage] = useState(1);
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const url = `${REACT_POKE}?offset=${offset}&limit=${ITEMS_PER_PAGE}`;
+  const [totalPages, settotalPages] = useState(1);
   const [pokemonURL, setpokemonURL] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
-  const [pageCurrent, setpageCurrent] = useState(REACT_POKE);
-  const [nextpageCurrent, setnextpageCurrent] = useState();
-  const [prevpageCurrent, setprevpageCurrent] = useState();
 
   useEffect(() => {
+    setloading(true);
     fetchPokemonList();
-  }, [pageCurrent]);
+    setloading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   const fetchPokemonList = async () => {
-    setloading(true);
     let cancel;
     await axios
-      .get(pageCurrent, {
-        cancelToken: new axios.CancelToken((c) => (cancel = c)),
-      })
+      .get(url, { cancelToken: new axios.CancelToken((c) => (cancel = c)) })
       .then((res) => {
-        setnextpageCurrent(res.data.next);
-        setprevpageCurrent(res.data.previous);
-
+        settotalPages(Math.ceil(res.data.count / ITEMS_PER_PAGE));
         setpokemonURL(res.data.results.map((u) => u.url));
-
         fetchPokemonData(pokemonURL);
-
-        setloading(false);
       });
 
     return () => cancel();
@@ -41,9 +38,8 @@ function App() {
   const fetchPokemonData = async (u) => {
     const promise = u.map(async (items) => {
       const response = await axios.get(items);
-      console.log(response);
       let name = response.data.name;
-      let formalName = name[0].toUpperCase()+name.substring(1)
+      let formalName = name[0].toUpperCase() + name.substring(1);
 
       return {
         name: formalName,
@@ -52,23 +48,17 @@ function App() {
         height: response.data.height,
         sprite: response.data.sprites.front_default,
         type: response.data.types.map((n) => {
-          let hold = n.type.name
-          return hold[0].toUpperCase()+hold.substring(1);
-          
-        }
-        )
+          let hold = n.type.name;
+          return hold[0].toUpperCase() + hold.substring(1);
+        }),
       };
     });
     const results = await axios.all(promise);
     setData(results);
   };
 
-  function getNextPage() {
-    setpageCurrent(nextpageCurrent);
-  }
-
-  function getPrevPage() {
-    setpageCurrent(prevpageCurrent);
+  function handlePageChange(page) {
+    setcurrentPage(page);
   }
 
   return (
@@ -81,8 +71,10 @@ function App() {
         <div>
           <PokemonList data={data} />
           <PaginationFunction
-            getNextPage={nextpageCurrent ? getNextPage : null}
-            getPrevPage={prevpageCurrent ? getPrevPage : null}
+            currentPage={currentPage}
+            setcurrentPage={setcurrentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
           />
         </div>
       )}
