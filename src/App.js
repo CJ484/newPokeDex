@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import PokemonList from "./PokemonList";
 import axios from "axios";
 import "./App.css";
-import REACT_POKE from "./systemReact";
 import PaginationFunction from "./Pagination";
 
 function App() {
   const ITEMS_PER_PAGE = 20;
   const [currentPage, setcurrentPage] = useState(1);
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const url = `${REACT_POKE}?offset=${offset}&limit=${ITEMS_PER_PAGE}`;
+  const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${ITEMS_PER_PAGE}`;
   const [totalPages, settotalPages] = useState(1);
   const [pokemonURL, setpokemonURL] = useState([]);
   const [data, setData] = useState([]);
