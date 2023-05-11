@@ -10,7 +10,6 @@ function App() {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${ITEMS_PER_PAGE}`;
   const [totalPages, settotalPages] = useState(1);
-  const [pokemonURL, setpokemonURL] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -27,8 +26,8 @@ function App() {
       .get(url, { cancelToken: new axios.CancelToken((c) => (cancel = c)) })
       .then((res) => {
         settotalPages(Math.ceil(res.data.count / ITEMS_PER_PAGE));
-        setpokemonURL(res.data.results.map((u) => u.url));
-        fetchPokemonData(pokemonURL);
+        let useData = (res.data.results.map((u)=> u.url));
+        fetchPokemonData(useData);
       });
 
     return () => cancel();
