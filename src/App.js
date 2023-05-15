@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PokemonList from "./PokemonList";
-import axios from "axios";
+import Axios from "axios";
 import "./App.css";
 import PaginationFunction from "./Pagination";
+import Spinner from 'react-bootstrap/Spinner'
 
 function App() {
   const ITEMS_PER_PAGE = 20;
@@ -22,8 +23,8 @@ function App() {
 
   const fetchPokemonList = async () => {
     let cancel;
-    await axios
-      .get(url, { cancelToken: new axios.CancelToken((c) => (cancel = c)) })
+    await Axios
+      .get(url, { cancelToken: new Axios.CancelToken((c) => (cancel = c)) })
       .then((res) => {
         settotalPages(Math.ceil(res.data.count / ITEMS_PER_PAGE));
         let useData = (res.data.results.map((u)=> u.url));
@@ -35,7 +36,7 @@ function App() {
 
   const fetchPokemonData = async (u) => {
     const promise = u.map(async (items) => {
-      const response = await axios.get(items);
+      const response = await Axios.get(items);
       let name = response.data.name;
       let formalName = name[0].toUpperCase() + name.substring(1);
 
@@ -51,7 +52,7 @@ function App() {
         }),
       };
     });
-    const results = await axios.all(promise);
+    const results = await Axios.all(promise);
     setData(results);
   };
 
@@ -59,12 +60,19 @@ function App() {
     setcurrentPage(page);
   }
 
+  const LoadingIndicatior = () => {
+    return(
+      <Spinner class="loader" animation="border" role="status" variant="warning">
+      </Spinner>
+    )
+  }
+
   return (
     <div className="body">
       <h1 className="display-1">Pokedex</h1>
       <h3 className="h3">Gotta Catch them all</h3>
       {loading ? (
-        <div>Loading...</div>
+        LoadingIndicatior()
       ) : (
         <div>
           <PokemonList data={data} />
