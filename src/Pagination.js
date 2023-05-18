@@ -1,48 +1,69 @@
-export default function PaginationFuntion({ currentPage, setcurrentPage, totalPages }) {
+import Pagination from "react-bootstrap/Pagination";
 
-    function handlePageChange(page) {
-      setcurrentPage(page);
+export default function PaginationFunction({currentPage, setcurrentPage, totalPages }) {
+  function handlePageChange(page) {
+    setcurrentPage(page);
+  }
+
+  function PaginationFunction ({currentPage, totalPages, handlePageChange}) { //this function returns back the render elements for both buttons and page numbers
+    const handlePreviousClick = () => {                           //It also holds the functions to change the state variables of the
+      handlePageChange(currentPage-1);
+    }
+    function handleNextClick() {
+      handlePageChange(currentPage + 1);
     }
 
-    function Pagination ({currentPage, totalPages, onPageChange}) { //this function returns back the render elements for both buttons and page numbers
-      const handlePreviousClick = () => {                           //It also holds the functions to change the state variables of the
-        onPageChange(currentPage-1);
+    function handlePageClick(page) {
+      handlePageChange(page);
+    }
+    
+    function handleFirstPage() {
+      handlePageChange(1)
+    }
+
+    function handleLastPage() {
+      handlePageChange(totalPages)
+    }
+
+    function PageRanges() {
+      const items = [];
+      let leftSide = currentPage - 3;
+      let rightSide = currentPage + 3;
+
+      if(leftSide <= 0) {
+        leftSide =1 
       }
-      function handleNextClick() {
-        onPageChange(currentPage + 1);
+      if (rightSide > totalPages) {
+        rightSide = totalPages
       }
 
-      function handlePageClick(page) {
-        onPageChange(page);
-      }
 
-      const pageButtons =[];
 
-      for (let i =1; i <= totalPages; i++) {
-        pageButtons.push(
-          <button className="page-link" style={currentPage === i ? {fontWeight: 'bold', background: 'lightblue'} : {}} key={i} onClick={()=> handlePageClick(i)} disabled={i === currentPage}>{i}</button>
+      for (let number = leftSide; number <= rightSide; number++) {
+        items.push(
+          <Pagination.Item key={number} active={currentPage === number} onClick={() => {handlePageClick(number)}}>
+            {number}
+          </Pagination.Item>
         );
       }
-
-      return (
-        <div className="d-flex">
-          <button className="btn" onClick={handlePreviousClick} disabled={currentPage === 1}>
-            <i className="fa-solid fa-circle-chevron-left fa-large"></i>
-          </button>
-
-          <div className="d-flex flex-wrap">{pageButtons}</div>
-
-          <button className="btn" onClick={handleNextClick} disabled={currentPage === totalPages}>
-            <i className="fa-solid fa-circle-chevron-right fa-large"></i>
-          </button>
-        </div>
-      );
-
+      return items
+      
     }
+
+    return(
+      <Pagination>
+        <Pagination.First onClick={handleFirstPage}/>
+        <Pagination.Prev onClick={handlePreviousClick}/>
+        <PageRanges />
+        <Pagination.Next onClick={handleNextClick}/>
+        <Pagination.Last onClick={handleLastPage}/>
+      </Pagination>
+    )
+  }
 
   return (
     <div className="pageNation">
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
+      <PaginationFunction currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange}/>
     </div>
   );
 }
