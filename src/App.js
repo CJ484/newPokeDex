@@ -4,12 +4,13 @@ import Axios from "axios";
 import "./App.css";
 import PaginationFunction from "./Pagination";
 import Spinner from 'react-bootstrap/Spinner'
+import Limit from "./selectLimit";
 
 function App() {
-  const ITEMS_PER_PAGE = 20;
+  const [pageLimit, setPageLimit] = useState(20);
   const [currentPage, setcurrentPage] = useState(1);
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${ITEMS_PER_PAGE}`;
+  const offset = (currentPage - 1) * pageLimit;
+  const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`;
   const [totalPages, settotalPages] = useState(1);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
@@ -26,7 +27,7 @@ function App() {
     await Axios
       .get(url, { cancelToken: new Axios.CancelToken((c) => (cancel = c)) })
       .then((res) => {
-        settotalPages(Math.ceil(res.data.count / ITEMS_PER_PAGE));
+        settotalPages(Math.ceil(res.data.count / pageLimit));
         let useData = (res.data.results.map((u)=> u.url));
         fetchPokemonData(useData);
       });
@@ -71,6 +72,10 @@ function App() {
     <div className="body">
       <h1 className="display-1">Pokedex</h1>
       <h3 className="h3">Gotta Catch them all</h3>
+      <div className="d-flex justify-content-center align-items-center">
+        <h2 style={{ marginRight: "15px", color: "#D1DACC" }}>Search Limit</h2>
+        <Limit setPageLimit={setPageLimit} pageLimit={pageLimit} />
+      </div>
       {loading ? (
         LoadingIndicatior()
       ) : (
