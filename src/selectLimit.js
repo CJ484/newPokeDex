@@ -1,4 +1,4 @@
-import Dropdown from 'react-bootstrap/dropdown'
+import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export default function Limit({setPageLimit, pageLimit}) {
