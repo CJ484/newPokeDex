@@ -20,7 +20,7 @@ function App() {
     fetchPokemonList();
     setloading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, pageLimit]);
 
   const fetchPokemonList = async () => {
     let cancel;
@@ -40,12 +40,16 @@ function App() {
       const response = await Axios.get(items);
       let name = response.data.name;
       let formalName = name[0].toUpperCase() + name.substring(1);
+      const height = response.data.height * 3.9;
+      const heightConvert = Math.round(height * 10) / 10
+      const weight = response.data.weight / 4.5;
+      const weightConvert = Math.round(weight * 10) / 10
 
       return {
         name: formalName,
         id: response.data.id,
-        weight: response.data.weight,
-        height: response.data.height,
+        weight: `${weightConvert} lbs`,
+        height: `${heightConvert} Inches`,
         sprite: response.data.sprites.front_default,
         type: response.data.types.map((n) => {
           let hold = n.type.name;
