@@ -5,6 +5,7 @@ import "./App.css";
 import PaginationFunction from "./Pagination";
 import Spinner from 'react-bootstrap/Spinner'
 import Limit from "./selectLimit";
+import pokeBall from './Images/pokeBall.png'
 
 function App() {
   const [pageLimit, setPageLimit] = useState(20);
@@ -74,10 +75,13 @@ function App() {
 
   return (
     <div className="body">
-      <h1 className="display-1">Pokedex</h1>
-      <h3 className="h3">Gotta Catch them all</h3>
+      <div style={{backgroundColor: "#d9d9d9",}}>
+        <img src={pokeBall} alt="poke ball" style={{width: "6rem"}}/>
+        <h1 className="display-1">POKEDEX</h1>
+        <h3 className="h3">Gotta Catch them all</h3>
+      </div>
       <div className="d-flex justify-content-center align-items-center">
-        <h2 style={{ marginRight: "15px", color: "#D1DACC" }}>Search Limit</h2>
+        <h2 style={{ marginRight: "15px", color: "black" }}>Search Limit: </h2>
         <Limit setPageLimit={setPageLimit} pageLimit={pageLimit} />
       </div>
       {loading ? (
