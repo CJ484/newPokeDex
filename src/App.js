@@ -5,9 +5,13 @@ import "./App.css";
 import PaginationFunction from "./Pagination";
 import Spinner from 'react-bootstrap/Spinner'
 import Limit from "./selectLimit";
+import { Suspense } from "react";
+import { useTranslation } from "react-i18next";
+import Languagelist from "./Components/Languagelist";
 import pokeBall from './Images/pokeBall.png'
 
 function App() {
+  const { t } = useTranslation();
   const [pageLimit, setPageLimit] = useState(20);
   const [currentPage, setcurrentPage] = useState(1);
   const offset = (currentPage - 1) * pageLimit;
@@ -75,13 +79,14 @@ function App() {
 
   return (
     <div className="body">
+      <Languagelist />
       <div style={{backgroundColor: "#d9d9d9",}}>
         <img src={pokeBall} alt="poke ball" style={{width: "6rem"}}/>
         <h1 className="display-1">POKEDEX</h1>
-        <h3 className="h3">Gotta Catch them all</h3>
+        <h3 className="h3">{t('main.header')}</h3>
       </div>
       <div className="d-flex justify-content-center align-items-center">
-        <h2 style={{ marginRight: "15px", color: "black" }}>Search Limit: </h2>
+        <h2 style={{ marginRight: "15px", color: "black" }}>{t('main.search')}: </h2>
         <Limit setPageLimit={setPageLimit} pageLimit={pageLimit} />
       </div>
       {loading ? (
@@ -101,4 +106,10 @@ function App() {
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...Loading">
+      <App />
+    </Suspense>
+  )
+}
