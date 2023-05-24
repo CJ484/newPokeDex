@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "dotenv": "^16.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
     "i18next": "^22.5.0",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.1",
@@ -25,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": [
