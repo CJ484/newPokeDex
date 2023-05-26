@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import './App.css';
+import './Styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import PokemonList from './PokemonList';
 import PaginationFunction from './Pagination';
@@ -74,14 +74,15 @@ function App() {
     <div className="body">
       <Languagelist />
       <div className="header">
-        <img src={pokeBall} alt="poke ball" />
-        <h1 className="display-1">POKEDEX</h1>
+        <img className="accent" src={pokeBall} alt="poke ball" />
+        <img className="title" src="https://fontmeme.com/permalink/230526/d083300c65e36ad9bccd252b935590d8.png" alt="pokedex-font" />
+        <img className="accent" src={pokeBall} alt="poke ball" />
         <h3 className="h3">{t('main.header')}</h3>
       </div>
       <div className="search d-flex justify-content-center align-items-center">
         <h2>
           {t('main.search')}
-          {' '}
+          {': '}
         </h2>
         <Limit setPageLimit={setPageLimit} pageLimit={pageLimit} />
       </div>
