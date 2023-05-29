@@ -9,7 +9,8 @@ export default function Limit({ setPageLimit, pageLimit }) {
   };
 
   const displayLimit = `${pageLimit}`;
-
+  // you can render <Dropdown.Item /> from the list [20, 25, 30, 50]
+  // It is more likely the format you will see
   return (
     <DropdownButton size="md" onSelect={setLimit} id="Search Limit" title={displayLimit}>
       <Dropdown.Item eventKey="20">20</Dropdown.Item>

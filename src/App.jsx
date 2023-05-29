@@ -14,6 +14,7 @@ function App() {
   const [pageLimit, setPageLimit] = useState(20);
   const [currentPage, setcurrentPage] = useState(1);
   const offset = (currentPage - 1) * pageLimit;
+  // You declated url const that is dependable on changable varibles of offset and pageLimit
   const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`;
   const [totalPages, settotalPages] = useState(1);
   const [data, setData] = useState([]);
@@ -24,6 +25,7 @@ function App() {
     const promise = u.map(async (items) => {
       const response = await axios.get(items);
       const { name } = response.data;
+      // Put all of that formatting into new functions inside src/utils/format.js
       const formalName = name[0].toUpperCase() + name.substring(1);
       const height = response.data.height * 3.9;
       const heightConvert = Math.round(height * 10) / 10;
@@ -53,6 +55,8 @@ function App() {
       setData(cache[`${offset}-${pageLimit}`]);
       return;
     }
+    // Just use that url const you declared above here directly
+    // await axios.get(`${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`)
     await axios.get(url)
       .then((res) => {
         settotalPages(Math.ceil(res.data.count / pageLimit));
