@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import './Styles.scss';
 import Spinner from 'react-bootstrap/Spinner';
-import PokemonList from './PokemonList';
-import PaginationFunction from './Pagination';
-import Limit from './SelectLimit';
+import PokemonList from './Components/PokemonList';
+import PaginationFunction from './Components/Pagination';
+import Limit from './Components/SelectLimit';
 import Languagelist from './Components/Languagelist';
 import pokeBall from './assets/Images/pokeBall.png';
 
