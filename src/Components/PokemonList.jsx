@@ -41,10 +41,12 @@ PokemonList.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
-      weight: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
+      weight: PropTypes.string.isRequired,
+      height: PropTypes.string.isRequired,
       sprite: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    }).isRequired,
+      type: PropTypes.arrayOf(
+        PropTypes.string.isRequired,
+      ),
+    }),
   ).isRequired,
 };
