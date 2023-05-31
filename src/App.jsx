@@ -8,45 +8,23 @@ import PaginationFunction from './Components/Pagination';
 import Limit from './Components/SelectLimit';
 import Languagelist from './Components/Languagelist';
 import pokeBall from './assets/Images/pokeBall.png';
+import dataFormatter from './utils/format';
+import imageGallery from './assets/Images/imageLinks';
 
 function App() {
   const { t } = useTranslation();
   const [pageLimit, setPageLimit] = useState(20);
   const [currentPage, setcurrentPage] = useState(1);
   const offset = (currentPage - 1) * pageLimit;
-  // You declated url const that is dependable on changable varibles of offset and pageLimit
-  const url = `${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`;
   const [totalPages, settotalPages] = useState(1);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
   const [cache, setCache] = useState({});
 
   const fetchPokemonData = async (u) => {
-    const promise = u.map(async (items) => {
-      const response = await axios.get(items);
-      const { name } = response.data;
-      // Put all of that formatting into new functions inside src/utils/format.js
-      const formalName = name[0].toUpperCase() + name.substring(1);
-      const height = response.data.height * 3.9;
-      const heightConvert = Math.round(height * 10) / 10;
-      const weight = response.data.weight / 4.5;
-      const weightConvert = Math.round(weight * 10) / 10;
-
-      return {
-        name: formalName,
-        id: response.data.id,
-        weight: `${weightConvert} lbs`,
-        height: `${heightConvert} Inches`,
-        sprite: response.data.sprites.front_default,
-        type: response.data.types.map((n) => {
-          const hold = n.type.name;
-          return hold[0].toUpperCase() + hold.substring(1);
-        }),
-      };
-    });
-    const results = await axios.all(promise);
-    setCache({ ...cache, [`${offset}-${pageLimit}`]: results });
-    setData(results);
+    const promise = await axios.all(dataFormatter(u));
+    setCache({ ...cache, [`${offset}-${pageLimit}`]: promise });
+    setData(promise);
   };
 
   const fetchPokemonList = async () => {
@@ -55,9 +33,8 @@ function App() {
       setData(cache[`${offset}-${pageLimit}`]);
       return;
     }
-    // Just use that url const you declared above here directly
-    // await axios.get(`${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`)
-    await axios.get(url)
+    await axios
+      .get(`${process.env.REACT_APP_POKE}?offset=${offset}&limit=${pageLimit}`)
       .then((res) => {
         settotalPages(Math.ceil(res.data.count / pageLimit));
         const useData = res.data.results.map((u) => u.url);
@@ -79,7 +56,7 @@ function App() {
       <Languagelist />
       <div className="header">
         <img className="accent" src={pokeBall} alt="poke ball" />
-        <img className="title" src="https://fontmeme.com/permalink/230526/d083300c65e36ad9bccd252b935590d8.png" alt="pokedex-font" />
+        <img className="title" src={imageGallery.pokeTitle} alt="pokedex-font" />
         <img className="accent" src={pokeBall} alt="poke ball" />
         <h3 className="h3">{t('main.header')}</h3>
       </div>
