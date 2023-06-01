@@ -1,0 +1,14 @@
+@import '../../utils/_variables.scss'; 
+
+.pagination {
+    margin: 30px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .page-item.active .page-link {
+        background-color: $base-color;
+        border-color: $base-color;
+    }
+
+}
