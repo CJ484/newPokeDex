@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';
+import './pagination.styles.scss';
 
 export default function PaginationFunction({ currentPage, setcurrentPage, totalPages }) {
   const handlePageChange = (page) => {

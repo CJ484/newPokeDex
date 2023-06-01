@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import './PokemonList.styles.scss';
 
 export default function PokemonList({ data }) {
   const { t } = useTranslation();
