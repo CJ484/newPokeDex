@@ -5,15 +5,18 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import './searchLimit.styles.scss';
 
 export default function Limit({ setPageLimit, pageLimit }) {
-  const setLimit = (s) => {
-    setPageLimit(s);
-  };
-  const displayLimit = `${pageLimit}`;
   const limitRanges = [20, 25, 30, 50];
+
+  const handleClick = (e) => {
+    setPageLimit(e.target.innerText);
+  };
+
   return (
-    <DropdownButton size="md" onSelect={setLimit} id="Search Limit" title={displayLimit}>
+    <DropdownButton size="md" id="Search Limit" title={`${pageLimit}`}>
       {limitRanges.map((numbers) => (
-        <Dropdown.Item key={numbers}>{numbers}</Dropdown.Item>
+        <Dropdown.Item key={numbers} onClick={(e) => handleClick(e)}>
+          {numbers}
+        </Dropdown.Item>
       ))}
     </DropdownButton>
 
