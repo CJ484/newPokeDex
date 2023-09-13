@@ -11,9 +11,9 @@ export default function Limit({ setPageLimit, pageLimit }) {
   const displayLimit = `${pageLimit}`;
   const limitRanges = [20, 25, 30, 50];
   return (
-    <DropdownButton size="md" onSelect={setLimit} id="Search Limit" title={displayLimit}>
+    <DropdownButton size="md" onSelect={(e) => setLimit(e)} id="Search Limit" title={displayLimit}>
       {limitRanges.map((numbers) => (
-        <Dropdown.Item key={numbers}>{numbers}</Dropdown.Item>
+        <Dropdown.Item eventKey={numbers} key={numbers}>{numbers}</Dropdown.Item>
       ))}
     </DropdownButton>
 
