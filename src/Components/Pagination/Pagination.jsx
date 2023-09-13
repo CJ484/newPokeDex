@@ -5,6 +5,7 @@ import './pagination.styles.scss';
 
 export default function PaginationFunction({ currentPage, setcurrentPage, totalPages }) {
   const handlePageChange = (page) => {
+    window.scrollTo(0, 0);
     setcurrentPage(page);
   };
 
