@@ -1,0 +1,19 @@
+:root {
+    --base-color: #586F7C;
+    --secondary-color: #2F4550;
+    --background-color: #B8DBD9;
+    --white: #F4F4F9;
+
+    --spacing-1: 4px;
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+
+    --font-size-1: 12px;
+    --font-size-2: 14px;
+    --font-size-3: 16px;
+    --font-size-4: 18px;
+    --font-size-5: 20px;
+
+}
