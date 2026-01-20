@@ -18,31 +18,6 @@ html {
     min-height: 100vh;
 }
 
-.header {
-    background-color: #d9d9d9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .logo {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .title {
-        width: 24%;
-        justify-content: center;
-    }
-    .accent {
-        width: 7%;
-    }
-    h3 {
-        font-family: 'Bruno Ace';
-        font-size: 2rem;
-    }
-}
-
 .h3 {
     color: var(--base-color);
 }
