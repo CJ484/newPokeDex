@@ -4,6 +4,7 @@
         "search": "Límite de Búsqueda",
         "weight": "Peso",
         "height": "Altura",
-        "type": "Tipo"
+        "type": "Tipo",
+        "footer": "Esta es mi entrega para mi curso de JavaScript Avanzado"
     }
 }

@@ -4,6 +4,7 @@
         "search": "Search Limit",
         "weight": "Weight",
         "height": "Height",
-        "type": "Type"
+        "type": "Type",
+        "footer": "This is is my submission for my Advanced JavaScript Course"
     }
 }

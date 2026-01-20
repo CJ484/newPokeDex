@@ -4,7 +4,8 @@
         "search": "Limit wyszukiwania",
         "weight": "Waga",
         "height": "wysokość",
-        "type": "typ"
+        "type": "typ",
+        "footer": "To jest moja praca na moim kursie JavaScript Avanzado"
     }
     
 }
