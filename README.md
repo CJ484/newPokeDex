@@ -4,8 +4,7 @@ I have recreated the Pokedex that display's all pokemon from generations 1-9. Th
 
 ## Demo
 
-https://65011c33cb503c21ede77516--newpokedexp-484.netlify.app/
-
+https://newpokedexp-484.netlify.app/
 
 ## Screenshots
 
