@@ -1,7 +1,8 @@
 :root {
     --base-color: #586F7C;
-    --secondary-color: #2F4550;
+    --secondary-color: #062839;
     --background-color: #B8DBD9;
+    --item-background-color: #b3daf0;
     --white: #F4F4F9;
 
     --spacing-1: 4px;
@@ -16,4 +17,5 @@
     --font-size-4: 18px;
     --font-size-5: 20px;
 
+    --border-radius: 0.5em;
 }
