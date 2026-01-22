@@ -1,33 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import './PokemonCardLayout.scss';
+import { PokemonExtendedData } from '@/types/pokemonTypes';
 
-type PokemonType = {
-  slot: number;
-  type: {
-    name: string;
-    url: string;
-  }
-};
-
-type PokemonCardLayoutProps = {
-  data: {
-    name: string;
-    id: number;
-    weight: string;
-    height: string;
-    sprites: {
-      front_default: string;
-      back_default: string;
-      front_shiny: string;
-      back_shiny: string;
-
-    };
-    types: PokemonType[];
-  }
-}
-
-export default function PokemonCardLayout({ data }: PokemonCardLayoutProps) {
+export default function PokemonCardLayout({ data }: { data: PokemonExtendedData }) {
   const { t } = useTranslation();
   const images = [data.sprites.front_default, data.sprites.back_default, data.sprites.front_shiny, data.sprites.back_shiny];
 
@@ -47,15 +23,15 @@ export default function PokemonCardLayout({ data }: PokemonCardLayoutProps) {
       <img className="card_image" src={images[currentImage]} alt={data.name} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       <div className="card_body">
         <h5 className="card_text">
-          {t('main.weight')}{': '}{data.weight}{' lbs'}
+          {t('main.weight')}{': '}{data.weight}{' kg'}
         </h5>
         <h5 className="card_text">
-          {t('main.height')}{': '}{data.height}{' Feet'}
+          {t('main.height')}{': '}{data.height}{' m'}
         </h5>
         <h5 className="card_text">
           {t('main.type')}{': '}
           <span className="card_types">
-            {data.types.map((type: PokemonType) => type.type.name).join(', ')}
+            {data.types.map((type: PokemonExtendedData['types'][number]) => type.type.name).join(', ')}
           </span>
         </h5>
       </div>
