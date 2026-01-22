@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { PokemonData } from '@/types/pokemonTypes';
 /**
  * 
  * Fetches the pokemon data from the PokeAPI
@@ -12,21 +12,11 @@ import axios from 'axios';
  * }
  */
 
-type FetchPokemonDataProps = {
-  offset?: number;
-  pageLimit?: number;
-}
+export default async function fetchPokemonData(url?: string) {
+  const defaultUrl = `${import.meta.env.VITE_POKE_API}?offset=0&limit=20`;
+  const listResponse = await axios.get(url || defaultUrl);
 
-type PokemonInput = {
-  name: string;
-  url: string;
-}
-
-export default async function fetchPokemonData({ offset = 1, pageLimit = 20 }: FetchPokemonDataProps) {
-  const url = `${import.meta.env.VITE_POKE_API}?offset=${offset}&limit=${pageLimit}`;
-  const listResponse = await axios.get(url);
-
-  const fetchExtendedInformation = async (pokemon: PokemonInput) => {
+  const fetchExtendedInformation = async (pokemon: PokemonData) => {
     const extendedResponse = await axios.get(pokemon.url);
     return extendedResponse.data;
   }
