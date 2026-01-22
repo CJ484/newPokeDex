@@ -1,0 +1,12 @@
+.pagination-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  max-width: 90vw;
+  width: 100%;
+  margin: var(--spacing-4) auto;
+  background-color: color-mix(in srgb, var(--item-background-color) 75%, white);
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius);
+}
